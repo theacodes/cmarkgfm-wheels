@@ -40,20 +40,20 @@ install:
 
 build_script:
     # Install the dependencies of the project.
-    - pip pip %BUILD_DEP%
+    - python -m pip install %BUILD_DEP%
     # Build wheel
-    - pip wheel --wheel-dir=wheelhouse --no-binary=cmarkgfm %PROJECT_SPEC%
-    - dir wheelhouse
+    - python -m pip wheel --wheel-dir=wheelhouse --no-binary=cmarkgfm %PROJECT_SPEC%
+    - python -m dir wheelhouse
 
 test_script:
     # create test env
     - virtualenv --python %PYTHON%\Python.exe test_env
     - test_env\Scripts\activate.bat
     - where python
-    - pip install %TEST_DEP%
+    - python -m pip install %TEST_DEP%
 
     # install from wheel
-    - pip install --pre --no-index --find-links=%REPO_DIR%\\wheelhouse %PACKAGE_NAME%
+    - python -m pip install --pre --no-index --find-links=%REPO_DIR%\\wheelhouse %PACKAGE_NAME%
 
     # Change into an innocuous directory and find tests from installation
     - mkdir for_testing
