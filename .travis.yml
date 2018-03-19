@@ -95,7 +95,8 @@ script:
 after_success:
     # Upload wheels to PyPI.
     - pip install twine
-    - twine upload ${TRAVIS_BUILD_DIR}/wheelhouse/
+    - ls ${TRAVIS_BUILD_DIR}/wheelhouse
+    - twine upload ${TRAVIS_BUILD_DIR}/wheelhouse/*
 
 branches:
   only:
