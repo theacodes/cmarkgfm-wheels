@@ -1,19 +1,20 @@
 env:
-    global:
-        - PROJECT_SPEC="cmarkgfm==0.1.0"
-        # pip dependencies to _build_ your project
-        - BUILD_DEPENDS="cffi"
-        # pip dependencies to _test_ your project.  Include any dependencies
-        # that you need, that are also specified in BUILD_DEPENDS, this will be
-        # a separate install.
-        - TEST_DEPENDS="pytest"
-        - PLAT=x86_64
-        - UNICODE_WIDTH=32
-        # Use TestPyPI
-        - TWINE_REPOSITORY_URL="https://test.pypi.org/legacy/"
-        # TWINE_USERNAME and TWINE_PASSWORD
-        - secure: XGg8SBBlg0xxqvTfRxSqy6qYe6QnGhNfb7DQ6PNeoZrp+IvqMN4FmctlYX677c5lk4s3gTVvxFNJvk9Rn2pdtQ97AzgLs/oQ63IofUkwLUc14wiaRTyjFBMnd0/31f7uCaziIFpD5BKcpdCteQhllxl8FFohZRQB+QI4tClFjgQ9p/wYj3vuHWkEcO4MaYDRa2r0XovWx6GJ+v+Kf0R0EUw4ufXm5Ygv9xT8UfOwqH1nYPXm0g/T4uxJqkg49nX4arUAW6HrcVXZQh76cSPhUwDC07qbjSX9LMhtLf8ZWGHLw1R/LwK4BMKXKSwW2hf6Ledr8KioaWzX+aCK/L8dQGCq4ReQtRhK8q4tSu2r5DSMtFDTh+ZGDc2v9JyEzAYIIbg6zeOjwJltqPC37LK6xostbyt75rUVGnklCecHBvdpvgdT0/4B0RneE2r9d2MQPA1wR5cp3dw+c2VYHvw3rs4UVGBWwwg708P8633dzgPQlN3glMPS4VdlCGh9uKu0iBkOX85T6+MHWxFtJkWiwMvrr3gLeI3HztCqh4u4XsjVWDVwwMm8aHkgI6rkzPMLLJHNfKZjDU/wALrhJT9SQ3YPXfFD3b66INSwBsh3IiOAV9d5gkVfufnY2o54Toq81VQ01KLKMGTdAmONWdwPZdLMmwzaaBEwnY/HQ66Yc2U=
-
+  global:
+    - PROJECT_SPEC="cmarkgfm==0.1.0"
+    # pip dependencies to _build_ your project
+    - BUILD_DEPENDS="cffi"
+    # pip dependencies to _test_ your project.  Include any dependencies
+    # that you need, that are also specified in BUILD_DEPENDS, this will be
+    # a separate install.
+    - TEST_DEPENDS="pytest"
+    - PLAT=x86_64
+    - UNICODE_WIDTH=32
+    # Use TestPyPI
+    - TWINE_REPOSITORY_URL="https://test.pypi.org/legacy/"
+    # TWINE_USERNAME and TWINE_PASSWORD
+    - secure: XGg8SBBlg0xxqvTfRxSqy6qYe6QnGhNfb7DQ6PNeoZrp+IvqMN4FmctlYX677c5lk4s3gTVvxFNJvk9Rn2pdtQ97AzgLs/oQ63IofUkwLUc14wiaRTyjFBMnd0/31f7uCaziIFpD5BKcpdCteQhllxl8FFohZRQB+QI4tClFjgQ9p/wYj3vuHWkEcO4MaYDRa2r0XovWx6GJ+v+Kf0R0EUw4ufXm5Ygv9xT8UfOwqH1nYPXm0g/T4uxJqkg49nX4arUAW6HrcVXZQh76cSPhUwDC07qbjSX9LMhtLf8ZWGHLw1R/LwK4BMKXKSwW2hf6Ledr8KioaWzX+aCK/L8dQGCq4ReQtRhK8q4tSu2r5DSMtFDTh+ZGDc2v9JyEzAYIIbg6zeOjwJltqPC37LK6xostbyt75rUVGnklCecHBvdpvgdT0/4B0RneE2r9d2MQPA1wR5cp3dw+c2VYHvw3rs4UVGBWwwg708P8633dzgPQlN3glMPS4VdlCGh9uKu0iBkOX85T6+MHWxFtJkWiwMvrr3gLeI3HztCqh4u4XsjVWDVwwMm8aHkgI6rkzPMLLJHNfKZjDU/wALrhJT9SQ3YPXfFD3b66INSwBsh3IiOAV9d5gkVfufnY2o54Toq81VQ01KLKMGTdAmONWdwPZdLMmwzaaBEwnY/HQ66Yc2U=
+    # WHEELHOUSE_UPLOADER_USERNAME and WHEELHOUSE_UPLOADER_SECRET
+    - secure: "K6PpfNQq/GHYauw4BzPEJWeRcCqAlFFZcG+EZI17ZOsc2FDACEsPQj0QuYHnOy7VeKE+EyxLXMDkqqAbNt/yruHpueor8prBxqS3YwUMPiqN82kQ51BgMWDJhsduYpnhyXvKzfiHOGw8KsW6JdLIlw9yJCgV4E1ON03wSzhiuGUuvd+fphujtL05SMFysxu0lK8FKYt4RfnI48kAaULJ2Ttb1ny/a5Nra7yPX99lOSA/IYJnPsdQC+QUEpZiYpzn2wMMy7PCrtRYNMUvBUaNB5C9BVdPbaPfvB+IANwLu0C/TjpVhrAnwk96EE/8danlW7n+67ouVJg0LvgkVU3J/4eqoLwnrMLu+Liz/KWvTi+jP0gAxgPiG70SREGtYWk55/dRkJX8VMXM1LhiVzkPgYGNakSisnA+O+/DftUEIr6XH3+cnFADO3bbV7jpCbapvSQRKSQopqwBGouvL3UfGXpODjiYrIXFfYcxILmQ3EsNe58RXVLRFPEoRFgRLLl1093JR96hHjAo0GnQ05aC5XVGV0imgNolyj2XMeZzXUhm60Hy5NnjM9CpwitkmxLyYzvqIZR8MWckrwIQ1gtNqTKQ+NswzXmjRCzGNcfDExjuLEA2NbOSiLVeSPoplHjiklLC6NOUtvG7AaCZ4x4M201YACuW5ZkkXm35lnUCaxc="
 
 language: python
 # The travis Python version is unrelated to the version we build and test
@@ -93,10 +94,13 @@ script:
     - install_run $PLAT
 
 after_success:
-    # Upload wheels to PyPI.
-    - pip install twine
-    - ls ${TRAVIS_BUILD_DIR}/wheelhouse
-    - twine upload ${TRAVIS_BUILD_DIR}/wheelhouse/*
+    # Upload wheels to the cmark-gfm Google Cloud Storage bucket
+    # Upload wheels to Rackspace container
+    - pip install wheelhouse-uploader
+    - python -m wheelhouse_uploader upload --local-folder
+        ${TRAVIS_BUILD_DIR}/wheelhouse/
+        --no-update-index
+        cmarkgfm-wheels
 
 branches:
   only:
