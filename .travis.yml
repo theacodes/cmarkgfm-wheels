@@ -11,6 +11,10 @@ env:
     - UNICODE_WIDTH=32
      # WHEELHOUSE_UPLOADER_USERNAME and WHEELHOUSE_UPLOADER_SECRET
     - secure: "K6PpfNQq/GHYauw4BzPEJWeRcCqAlFFZcG+EZI17ZOsc2FDACEsPQj0QuYHnOy7VeKE+EyxLXMDkqqAbNt/yruHpueor8prBxqS3YwUMPiqN82kQ51BgMWDJhsduYpnhyXvKzfiHOGw8KsW6JdLIlw9yJCgV4E1ON03wSzhiuGUuvd+fphujtL05SMFysxu0lK8FKYt4RfnI48kAaULJ2Ttb1ny/a5Nra7yPX99lOSA/IYJnPsdQC+QUEpZiYpzn2wMMy7PCrtRYNMUvBUaNB5C9BVdPbaPfvB+IANwLu0C/TjpVhrAnwk96EE/8danlW7n+67ouVJg0LvgkVU3J/4eqoLwnrMLu+Liz/KWvTi+jP0gAxgPiG70SREGtYWk55/dRkJX8VMXM1LhiVzkPgYGNakSisnA+O+/DftUEIr6XH3+cnFADO3bbV7jpCbapvSQRKSQopqwBGouvL3UfGXpODjiYrIXFfYcxILmQ3EsNe58RXVLRFPEoRFgRLLl1093JR96hHjAo0GnQ05aC5XVGV0imgNolyj2XMeZzXUhm60Hy5NnjM9CpwitkmxLyYzvqIZR8MWckrwIQ1gtNqTKQ+NswzXmjRCzGNcfDExjuLEA2NbOSiLVeSPoplHjiklLC6NOUtvG7AaCZ4x4M201YACuW5ZkkXm35lnUCaxc="
+    # Use TestPyPI
+    - TWINE_REPOSITORY_URL="https://test.pypi.org/legacy/"
+    # TWINE_USERNAME and TWINE_PASSWORD
+    - secure: XGg8SBBlg0xxqvTfRxSqy6qYe6QnGhNfb7DQ6PNeoZrp+IvqMN4FmctlYX677c5lk4s3gTVvxFNJvk9Rn2pdtQ97AzgLs/oQ63IofUkwLUc14wiaRTyjFBMnd0/31f7uCaziIFpD5BKcpdCteQhllxl8FFohZRQB+QI4tClFjgQ9p/wYj3vuHWkEcO4MaYDRa2r0XovWx6GJ+v+Kf0R0EUw4ufXm5Ygv9xT8UfOwqH1nYPXm0g/T4uxJqkg49nX4arUAW6HrcVXZQh76cSPhUwDC07qbjSX9LMhtLf8ZWGHLw1R/LwK4BMKXKSwW2hf6Ledr8KioaWzX+aCK/L8dQGCq4ReQtRhK8q4tSu2r5DSMtFDTh+ZGDc2v9JyEzAYIIbg6zeOjwJltqPC37LK6xostbyt75rUVGnklCecHBvdpvgdT0/4B0RneE2r9d2MQPA1wR5cp3dw+c2VYHvw3rs4UVGBWwwg708P8633dzgPQlN3glMPS4VdlCGh9uKu0iBkOX85T6+MHWxFtJkWiwMvrr3gLeI3HztCqh4u4XsjVWDVwwMm8aHkgI6rkzPMLLJHNfKZjDU/wALrhJT9SQ3YPXfFD3b66INSwBsh3IiOAV9d5gkVfufnY2o54Toq81VQ01KLKMGTdAmONWdwPZdLMmwzaaBEwnY/HQ66Yc2U=
 
 language: python
 # The travis Python version is unrelated to the version we build and test
@@ -92,15 +96,15 @@ script:
 after_success:
     # Upload wheels to the cmark-gfm Google Cloud Storage bucket
     # Upload wheels to Rackspace container
-    - pip install wheelhouse-uploader
-    - python -c "import os; from libcloud.common.google import GoogleAuthType; print(os.environ['WHEELHOUSE_UPLOADER_USERNAME']); print(len(os.environ['WHEELHOUSE_UPLOADER_USERNAME'])); print(GoogleAuthType.guess_type(os.environ['WHEELHOUSE_UPLOADER_USERNAME']))"
-    - python -m wheelhouse_uploader upload
-        --provider GOOGLE_STORAGE
-        --no-update-index
-        --username ${WHEELHOUSE_UPLOADER_USERNAME}
-        --secret ${WHEELHOUSE_UPLOADER_SECRET}
-        --local-folder ${TRAVIS_BUILD_DIR}/wheelhouse/
-        cmarkgfm-wheels
+    - pip install wheelhouse-uploader requests[security] twine
+    - twine upload --skip-existing ${TRAVIS_BUILD_DIR}/wheelhouse/*
+    # - python -m wheelhouse_uploader upload
+    #     --provider GOOGLE_STORAGE
+    #     --no-update-index
+    #     --username ${WHEELHOUSE_UPLOADER_USERNAME}
+    #     --secret ${WHEELHOUSE_UPLOADER_SECRET}
+    #     --local-folder ${TRAVIS_BUILD_DIR}/wheelhouse/
+    #     cmarkgfm-wheels
 
 branches:
   only:
