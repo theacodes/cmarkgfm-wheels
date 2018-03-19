@@ -94,6 +94,7 @@ after_success:
     # Upload wheels to Rackspace container
     - pip install wheelhouse-uploader
     - echo $WHEELHOUSE_UPLOADER_USERNAME
+    - python -c "import os; from libcloud.common.google import GoogleAuthType; print(GoogleAuthType.guess_type(os.environ['WHEELHOUSE_UPLOADER_USERNAME']))"
     - python -m wheelhouse_uploader upload
         --provider GOOGLE_STORAGE
         --no-update-index
