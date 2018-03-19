@@ -4,7 +4,7 @@
 environment:
   global:
     PROJECT_SPEC: "cmarkgfm==0.1.0"
-    BUILD_DEP: "cffi"
+    BUILD_DEP: "wheel cffi"
     TEST_DEP: "pytest"
     WHEELHOUSE_UPLOADER_USERNAME:
       secure: +pk0pTV/7c8wam5X9MxIk9KmEvRSLlkXnJ1ZD7UrZAo=
