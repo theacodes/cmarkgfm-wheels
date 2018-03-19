@@ -9,8 +9,6 @@ env:
     - TEST_DEPENDS="pytest"
     - PLAT=x86_64
     - UNICODE_WIDTH=32
-     # WHEELHOUSE_UPLOADER_USERNAME and WHEELHOUSE_UPLOADER_SECRET
-    - secure: "K6PpfNQq/GHYauw4BzPEJWeRcCqAlFFZcG+EZI17ZOsc2FDACEsPQj0QuYHnOy7VeKE+EyxLXMDkqqAbNt/yruHpueor8prBxqS3YwUMPiqN82kQ51BgMWDJhsduYpnhyXvKzfiHOGw8KsW6JdLIlw9yJCgV4E1ON03wSzhiuGUuvd+fphujtL05SMFysxu0lK8FKYt4RfnI48kAaULJ2Ttb1ny/a5Nra7yPX99lOSA/IYJnPsdQC+QUEpZiYpzn2wMMy7PCrtRYNMUvBUaNB5C9BVdPbaPfvB+IANwLu0C/TjpVhrAnwk96EE/8danlW7n+67ouVJg0LvgkVU3J/4eqoLwnrMLu+Liz/KWvTi+jP0gAxgPiG70SREGtYWk55/dRkJX8VMXM1LhiVzkPgYGNakSisnA+O+/DftUEIr6XH3+cnFADO3bbV7jpCbapvSQRKSQopqwBGouvL3UfGXpODjiYrIXFfYcxILmQ3EsNe58RXVLRFPEoRFgRLLl1093JR96hHjAo0GnQ05aC5XVGV0imgNolyj2XMeZzXUhm60Hy5NnjM9CpwitkmxLyYzvqIZR8MWckrwIQ1gtNqTKQ+NswzXmjRCzGNcfDExjuLEA2NbOSiLVeSPoplHjiklLC6NOUtvG7AaCZ4x4M201YACuW5ZkkXm35lnUCaxc="
     # Use TestPyPI
     - TWINE_REPOSITORY_URL="https://test.pypi.org/legacy/"
     # TWINE_USERNAME and TWINE_PASSWORD
@@ -31,56 +29,56 @@ matrix:
   include:
     - os: linux
       env: MB_PYTHON_VERSION=2.7
-    # - os: linux
-    #   env:
-    #     - MB_PYTHON_VERSION=2.7
-    #     - UNICODE_WIDTH=16
-    # - os: linux
-    #   env:
-    #     - MB_PYTHON_VERSION=2.7
-    #     - PLAT=i686
-    # - os: linux
-    #   env:
-    #     - MB_PYTHON_VERSION=2.7
-    #     - PLAT=i686
-    #     - UNICODE_WIDTH=16
-    # - os: linux
-    #   env:
-    #     - MB_PYTHON_VERSION=3.4
-    # - os: linux
-    #   env:
-    #     - MB_PYTHON_VERSION=3.4
-    #     - PLAT=i686
-    # - os: linux
-    #   env:
-    #     - MB_PYTHON_VERSION=3.5
-    # - os: linux
-    #   env:
-    #     - MB_PYTHON_VERSION=3.5
-    #     - PLAT=i686
-    # - os: linux
-    #   env:
-    #     - MB_PYTHON_VERSION=3.6
-    # - os: linux
-    #   env:
-    #     - MB_PYTHON_VERSION=3.6
-    #     - PLAT=i686
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=2.7
+        - UNICODE_WIDTH=16
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=2.7
+        - PLAT=i686
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=2.7
+        - PLAT=i686
+        - UNICODE_WIDTH=16
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.4
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.4
+        - PLAT=i686
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.5
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.5
+        - PLAT=i686
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.6
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.6
+        - PLAT=i686
     - os: osx
       language: generic
       env:
         - MB_PYTHON_VERSION=2.7
-    # - os: osx
-    #   language: generic
-    #   env:
-    #     - MB_PYTHON_VERSION=3.4
-    # - os: osx
-    #   language: generic
-    #   env:
-    #     - MB_PYTHON_VERSION=3.5
-    # - os: osx
-    #   language: generic
-    #   env:
-    #     - MB_PYTHON_VERSION=3.6
+    - os: osx
+      language: generic
+      env:
+        - MB_PYTHON_VERSION=3.4
+    - os: osx
+      language: generic
+      env:
+        - MB_PYTHON_VERSION=3.5
+    - os: osx
+      language: generic
+      env:
+        - MB_PYTHON_VERSION=3.6
 
 before_install:
     - source multibuild/common_utils.sh
@@ -94,17 +92,9 @@ script:
     - install_run $PLAT
 
 after_success:
-    # Upload wheels to the cmark-gfm Google Cloud Storage bucket
-    # Upload wheels to Rackspace container
-    - pip install wheelhouse-uploader requests[security] twine
+    # Upload wheels to PyPI
+    - pip install requests[security] twine
     - twine upload --skip-existing ${TRAVIS_BUILD_DIR}/wheelhouse/*
-    # - python -m wheelhouse_uploader upload
-    #     --provider GOOGLE_STORAGE
-    #     --no-update-index
-    #     --username ${WHEELHOUSE_UPLOADER_USERNAME}
-    #     --secret ${WHEELHOUSE_UPLOADER_SECRET}
-    #     --local-folder ${TRAVIS_BUILD_DIR}/wheelhouse/
-    #     cmarkgfm-wheels
 
 branches:
   only:
