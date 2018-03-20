@@ -1,22 +1,25 @@
-# vim ft=yaml
-# CI on Windows via appveyor
-
 environment:
   global:
     PROJECT_SPEC: "cmarkgfm==0.2.0"
     PACKAGE_NAME: "cmarkgfm"
     BUILD_DEP: "wheel cffi"
     TEST_DEP: "pytest"
+
+    # Configuration for PyPI
     TWINE_USERNAME:
-      secure: 6shR/E4TjJZGjlLh2FLMcg==
+        secure: MgXQprcRtsXUS2FGVkLrVw==
     TWINE_PASSWORD:
-      secure: 6t7jX/7mfyee2ZhO7rI1+g==
-    # Use TestPyPI
-    TWINE_REPOSITORY_URL: "https://test.pypi.org/legacy/"
+        secure: UkPgnyl738//+efMA0rhVA==
+
+    # Configuration for TestPyPI
+    # TWINE_USERNAME:
+    #   secure: 6shR/E4TjJZGjlLh2FLMcg==
+    # TWINE_PASSWORD:
+    #   secure: 6t7jX/7mfyee2ZhO7rI1+g==
+    # # Use TestPyPI
+    # TWINE_REPOSITORY_URL: "https://test.pypi.org/legacy/"
 
   matrix:
-    - PYTHON: C:\Python27
-    - PYTHON: C:\Python27-x64
     - PYTHON: C:\Python35
     - PYTHON: C:\Python35-x64
     - PYTHON: C:\Python36
