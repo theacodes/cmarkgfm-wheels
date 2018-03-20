@@ -3,13 +3,15 @@
 
 environment:
   global:
-    PROJECT_SPEC: "cmarkgfm==0.1.0"
+    PROJECT_SPEC: "cmarkgfm==0.2.0"
     BUILD_DEP: "wheel cffi"
     TEST_DEP: "pytest"
-    WHEELHOUSE_UPLOADER_USERNAME:
-      secure: +pk0pTV/7c8wam5X9MxIk9KmEvRSLlkXnJ1ZD7UrZAo=
-    WHEELHOUSE_UPLOADER_SECRET:
-      secure: OoKtt5NaSeYDuj8IE3jD1cU64nhCD0HmjRUi91+cZBjtRydJ4Qs28GDJ/hwuAx1n
+    TWINE_USERNAME:
+      secure: 6shR/E4TjJZGjlLh2FLMcg==
+    TWINE_PASSWORD:
+      secure: 6t7jX/7mfyee2ZhO7rI1+g==
+    # Use TestPyPI
+    TWINE_REPOSITORY_URL: "https://test.pypi.org/legacy/"
 
   matrix:
     - PYTHON: C:\Python35
@@ -69,13 +71,8 @@ on_success:
   # Upload the generated wheel package to Rackspace
   # On Windows, Apache Libcloud cannot find a standard CA cert bundle so we
   # disable the ssl checks.
-  - pip install wheelhouse-uploader
-  - "python -m wheelhouse_uploader upload
-    --no-ssl-check
-    --no-update-index
-    --provider GOOGLE_STORAGE
-    --local-folder=%REPO_DIR%\\wheelhouse
-    cmarkgfm-wheels"
+  - pip install requests[security] twine
+  - twine upload --skip-existing %REPO_DIR%\\wheelhouse\*
 
 cache:
   # Use the appveyor cache to avoid re-downloading large archives.
