@@ -4,6 +4,7 @@
 environment:
   global:
     PROJECT_SPEC: "cmarkgfm==0.2.0"
+    PACKAGE_NAME: "cmarkgfm"
     BUILD_DEP: "wheel cffi"
     TEST_DEP: "pytest"
     TWINE_USERNAME:
@@ -44,7 +45,7 @@ build_script:
     # Install the dependencies of the project.
     - python -m pip install %BUILD_DEP%
     # Build wheel
-    - python -m pip wheel --wheel-dir=wheelhouse --no-binary=cmarkgfm %PROJECT_SPEC%
+    - python -m pip wheel --wheel-dir=wheelhouse --no-binary=%PACKAGE_NAME% %PROJECT_SPEC%
     - dir wheelhouse
 
 test_script:
@@ -61,7 +62,7 @@ test_script:
     - mkdir for_testing
     - cd for_testing
     - python --version
-    - python -c "import cmarkgfm;"
+    - python -c "import %PACKAGE_NAME%;"
     - cd ..
 
 artifacts:
@@ -72,7 +73,7 @@ on_success:
   # On Windows, Apache Libcloud cannot find a standard CA cert bundle so we
   # disable the ssl checks.
   - pip install requests[security] twine
-  - twine upload --skip-existing %REPO_DIR%\\wheelhouse\cmarkgfm*.whl
+  - twine upload --skip-existing %REPO_DIR%\\wheelhouse\%PACKAGE_NAME%*.whl
 
 cache:
   # Use the appveyor cache to avoid re-downloading large archives.
