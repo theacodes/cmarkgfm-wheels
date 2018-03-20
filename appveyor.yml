@@ -56,7 +56,7 @@ test_script:
     - python -m pip install %TEST_DEP%
 
     # install from wheel
-    - python -m pip install --pre --no-index --find-links=%REPO_DIR%\\wheelhouse %PACKAGE_NAME%
+    - python -m pip install --pre --no-index --find-links=wheelhouse %PACKAGE_NAME%
 
     # Change into an innocuous directory and find tests from installation
     - mkdir for_testing
@@ -66,14 +66,14 @@ test_script:
     - cd ..
 
 artifacts:
-    - path: "%REPO_DIR%\\wheelhouse"
+    - path: wheelhouse
 
 on_success:
   # Upload the generated wheel package to Rackspace
   # On Windows, Apache Libcloud cannot find a standard CA cert bundle so we
   # disable the ssl checks.
   - pip install requests[security] twine
-  - twine upload --skip-existing %REPO_DIR%\\wheelhouse\%PACKAGE_NAME%*.whl
+  - twine upload --skip-existing wheelhouse\%PACKAGE_NAME%*.whl
 
 cache:
   # Use the appveyor cache to avoid re-downloading large archives.
