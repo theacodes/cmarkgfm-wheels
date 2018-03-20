@@ -45,7 +45,7 @@ build_script:
     - python -m pip install %BUILD_DEP%
     # Build wheel
     - python -m pip wheel --wheel-dir=wheelhouse --no-binary=cmarkgfm %PROJECT_SPEC%
-    - python -m dir wheelhouse
+    - dir wheelhouse
 
 test_script:
     # create test env
@@ -72,7 +72,7 @@ on_success:
   # On Windows, Apache Libcloud cannot find a standard CA cert bundle so we
   # disable the ssl checks.
   - pip install requests[security] twine
-  - twine upload --skip-existing %REPO_DIR%\\wheelhouse\*
+  - twine upload --skip-existing %REPO_DIR%\\wheelhouse\cmarkgfm*.whl
 
 cache:
   # Use the appveyor cache to avoid re-downloading large archives.
