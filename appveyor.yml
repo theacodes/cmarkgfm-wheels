@@ -49,8 +49,7 @@ install:
     - python -c "import struct; print(struct.calcsize('P') * 8)"
 
     # Install the mingw compiler, but only if we're on Python 2.7
-    - pip install --no-cache-dir --pre --index https://pypi.anaconda.org/carlkl
-/simple "mingwpy; python_version == '2.7'"
+    - pip install --no-cache-dir --pre --index https://pypi.anaconda.org/carlkl/simple "mingwpy; python_version == '2.7'"
 
 build_script:
     # Install the dependencies of the project.
