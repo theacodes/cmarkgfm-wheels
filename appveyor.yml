@@ -1,6 +1,6 @@
 environment:
   global:
-    PROJECT_SPEC: "cmarkgfm==0.2.0"
+    PROJECT_SPEC: "cmarkgfm==0.3.0"
     PACKAGE_NAME: "cmarkgfm"
     BUILD_DEP: "wheel cffi"
     TEST_DEP: "pytest"
@@ -20,6 +20,8 @@ environment:
     # TWINE_REPOSITORY_URL: "https://test.pypi.org/legacy/"
 
   matrix:
+    - PYTHON: C:\Python27
+    - PYTHON: C:\Python27-x64
     - PYTHON: C:\Python35
     - PYTHON: C:\Python35-x64
     - PYTHON: C:\Python36
@@ -45,6 +47,10 @@ install:
     # Check that we have the expected version and architecture for Python
     - python --version
     - python -c "import struct; print(struct.calcsize('P') * 8)"
+
+    # Install the mingw compiler, but only if we're on Python 2.7
+    - pip install --no-cache-dir --pre --index https://pypi.anaconda.org/carlkl
+/simple "mingwpy; python_version == '2.7'"
 
 build_script:
     # Install the dependencies of the project.
