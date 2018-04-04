@@ -23,7 +23,9 @@ environment:
     - PYTHON: C:\Python27
     - PYTHON: C:\Python27-x64
     - PYTHON: C:\Python34
+      EXTRA_BUILD_OPTIONS: --compiler=mingw32
     - PYTHON: C:\Python34-x64
+      EXTRA_BUILD_OPTIONS: --compiler=mingw32    
     - PYTHON: C:\Python35
     - PYTHON: C:\Python35-x64
     - PYTHON: C:\Python36
@@ -57,7 +59,7 @@ build_script:
     # Install the dependencies of the project.
     - python -m pip install %BUILD_DEP%
     # Build wheel
-    - python -m pip wheel --wheel-dir=wheelhouse --no-binary=%PACKAGE_NAME% %PROJECT_SPEC%
+    - python -m pip wheel --wheel-dir=wheelhouse --no-binary=%PACKAGE_NAME% %PROJECT_SPEC% %EXTRA_BUILD_OPTONS%
     - dir wheelhouse
 
 test_script:
