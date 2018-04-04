@@ -23,10 +23,10 @@ environment:
     - PYTHON: C:\Python27
     - PYTHON: C:\Python27-x64
     - PYTHON: C:\Python34
-      EXTRA_BUILD_OPTIONS: --build-option=--compiler=mingw32
+      EXTRA_BUILD_OPTIONS: --global-option=build_ext --glboal-option=--compiler=mingw32
     - PYTHON: C:\Python34-x64
-      EXTRA_BUILD_OPTIONS: --build-option=--compiler=mingw32    
-    - PYTHON: C:\Python35
+      EXTRA_BUILD_OPTIONS: --global-option=build_ext --global-option=--compiler=mingw32    
+    - PYTHON: C:\Python35https://pip.pypa.io/en/stable/reference/pip_wheel/#customising-the-build
     - PYTHON: C:\Python35-x64
     - PYTHON: C:\Python36
     - PYTHON: C:\Python36-x64
