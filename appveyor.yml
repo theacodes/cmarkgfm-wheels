@@ -26,7 +26,7 @@ environment:
       EXTRA_BUILD_OPTIONS: --global-option=build_ext --global-option=--compiler=mingw32
     - PYTHON: C:\Python34-x64
       EXTRA_BUILD_OPTIONS: --global-option=build_ext --global-option=--compiler=mingw32    
-    - PYTHON: C:\Python35https://pip.pypa.io/en/stable/reference/pip_wheel/#customising-the-build
+    - PYTHON: C:\Python35
     - PYTHON: C:\Python35-x64
     - PYTHON: C:\Python36
     - PYTHON: C:\Python36-x64
