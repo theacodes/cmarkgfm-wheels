@@ -85,7 +85,7 @@ on_success:
   # On Windows, Apache Libcloud cannot find a standard CA cert bundle so we
   # disable the ssl checks.
   - pip install requests[security] twine
-  - twine upload --skip-existing wheelhouse\%PACKAGE_NAME%*.whl
+  - ps: if ($env:TWINE_PASSWORD -ne $null) { twine upload --skip-existing wheelhouse\%PACKAGE_NAME%*.whl }
 
 cache:
   # Use the appveyor cache to avoid re-downloading large archives.
