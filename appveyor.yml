@@ -22,14 +22,12 @@ environment:
   matrix:
     - PYTHON: C:\Python27
     - PYTHON: C:\Python27-x64
-    - PYTHON: C:\Python34
-      EXTRA_BUILD_OPTIONS: --global-option=build_ext --global-option=--compiler=mingw32
-    - PYTHON: C:\Python34-x64
-      EXTRA_BUILD_OPTIONS: --global-option=build_ext --global-option=--compiler=mingw32
     - PYTHON: C:\Python35
     - PYTHON: C:\Python35-x64
     - PYTHON: C:\Python36
     - PYTHON: C:\Python36-x64
+    - PYTHON: C:\Python34
+    - PYTHON: C:\Python34-x64
 
 
 matrix:
@@ -87,7 +85,7 @@ on_success:
   # On Windows, Apache Libcloud cannot find a standard CA cert bundle so we
   # disable the ssl checks.
   - pip install requests[security] twine
-  - ps: if ($env:TWINE_PASSWORD -ne $null) { twine upload --skip-existing wheelhouse\%PACKAGE_NAME%*.whl }
+  - twine upload --skip-existing wheelhouse\%PACKAGE_NAME%*.whl
 
 cache:
   # Use the appveyor cache to avoid re-downloading large archives.
