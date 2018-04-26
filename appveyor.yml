@@ -1,6 +1,6 @@
 environment:
   global:
-    PROJECT_SPEC: "cmarkgfm==0.4.0"
+    PROJECT_SPEC: "cmarkgfm==0.4.1"
     PACKAGE_NAME: "cmarkgfm"
     BUILD_DEP: "wheel cffi"
     TEST_DEP: "pytest"

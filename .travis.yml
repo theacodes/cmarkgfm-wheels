@@ -1,6 +1,6 @@
 env:
   global:
-    - PROJECT_SPEC="cmarkgfm==0.4.0"
+    - PROJECT_SPEC="cmarkgfm==0.4.1"
     # pip dependencies to _build_ your project
     - BUILD_DEPENDS="cffi"
     # pip dependencies to _test_ your project.  Include any dependencies
