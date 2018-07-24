@@ -7,9 +7,9 @@ environment:
 
     # Configuration for PyPI
     TWINE_USERNAME:
-        secure: MgXQprcRtsXUS2FGVkLrVw==
+        secure: I/mthkSjVPkEXaX1ESWEKQ==
     TWINE_PASSWORD:
-        secure: UkPgnyl738//+efMA0rhVA==
+        secure: lNPm9GxVvzb3h0SeaDiFYg==
 
     # Configuration for TestPyPI
     # TWINE_USERNAME:
