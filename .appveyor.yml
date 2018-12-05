@@ -60,7 +60,7 @@ build_script:
     - python -m pip install %BUILD_DEP%
     # Build wheel
     - python -m pip wheel -v --no-cache-dir --wheel-dir=wheelhouse --no-binary=%PACKAGE_NAME% %PROJECT_SPEC% %EXTRA_BUILD_OPTIONS%
-    - dir wheelhouse
+    - dir /s /b wheelhouse
 
 test_script:
     # create test env
