@@ -65,18 +65,16 @@ build_script:
 test_script:
     # create test env
     - virtualenv --python %PYTHON%\Python.exe test_env
-    - test_env\Scripts\activate.bat
-    - where python
-    - python -m pip install %TEST_DEP%
+    - test_env\Scripts\python -m pip install %TEST_DEP%
 
     # install from wheel
-    - python -m pip install --pre --no-index --find-links=wheelhouse %PACKAGE_NAME%
+    - test_env\Scripts\python -m pip install --pre --no-index --find-links=wheelhouse %PACKAGE_NAME%
 
     # Change into an innocuous directory and find tests from installation
     - mkdir for_testing
     - cd for_testing
-    - python --version
-    - python -c "import %PACKAGE_NAME%;"
+    - test_env\Scripts\python --version
+    - test_env\Scripts\python -c "import %PACKAGE_NAME%;"
     - cd ..
 
 artifacts:
