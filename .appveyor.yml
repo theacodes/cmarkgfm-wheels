@@ -50,6 +50,8 @@ install:
     - py -%PYTHON% -c "import struct; print(struct.calcsize('P') * 8)"
 
     # Install the mingw compiler, but only if we're on Python 2.7 or 3.4
+    # because building ``cmarkgfm`` for these versions fails when using the
+    # default compiler toolchain MSVC 2008, as that's too old.
     - py -%PYTHON% -m pip install --no-cache-dir --pre
         --index https://pypi.anaconda.org/carlkl/simple
         "mingwpy; python_version < '3.5'"
