@@ -1,3 +1,4 @@
+---
 environment:
   global:
     PROJECT_SPEC: "cmarkgfm==0.4.2"
@@ -20,17 +21,16 @@ environment:
     # TWINE_REPOSITORY_URL: "https://test.pypi.org/legacy/"
 
   matrix:
-    - PYTHON: C:\Python27
-    - PYTHON: C:\Python27-x64
-    - PYTHON: C:\Python35
-    - PYTHON: C:\Python35-x64
-    - PYTHON: C:\Python36
-    - PYTHON: C:\Python36-x64
-    - PYTHON: C:\Python37
-    - PYTHON: C:\Python37-x64
-    - PYTHON: C:\Python34
-    - PYTHON: C:\Python34-x64
-
+    - PYTHON: '2.7-32'
+    - PYTHON: '2.7'
+    - PYTHON: '3.4-32'
+    - PYTHON: '3.4'
+    - PYTHON: '3.5-32'
+    - PYTHON: '3.5'
+    - PYTHON: '3.6-32'
+    - PYTHON: '3.6'
+    - PYTHON: '3.7-32'
+    - PYTHON: '3.7'
 
 matrix:
     fast_finish: true
@@ -38,56 +38,56 @@ matrix:
 install:
     # Fetch submodules
     - git submodule update --init --recursive
-    # Prepend newly installed Python to the PATH of this build (this cannot be
-    # done from inside the powershell script as it would require to restart
-    # the parent CMD process).
-    - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
-    - python -m pip install -U pip
+
+    - py -%PYTHON% -m pip install --upgrade pip
 
     # Fix MSVC builds for 64-bit Python. See:
     # http://stackoverflow.com/questions/32091593/cannot-install-windows-sdk-7-1-on-windows-10
     - echo "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 > "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\amd64/vcvars64.bat"
 
     # Check that we have the expected version and architecture for Python
-    - python --version
-    - python -c "import struct; print(struct.calcsize('P') * 8)"
+    - py -%PYTHON% --version
+    - py -%PYTHON% -c "import struct; print(struct.calcsize('P') * 8)"
 
     # Install the mingw compiler, but only if we're on Python 2.7 or 3.4
-    - pip install --no-cache-dir --pre --index https://pypi.anaconda.org/carlkl/simple "mingwpy; python_version < '3.5'"
+    # because building ``cmarkgfm`` for these versions fails when using the
+    # default compiler toolchain MSVC 2008, as that's too old.
+    - py -%PYTHON% -m pip install --no-cache-dir --pre
+        --index https://pypi.anaconda.org/carlkl/simple
+        "mingwpy; python_version < '3.5'"
 
 build_script:
     # Install the dependencies of the project.
-    - python -m pip install %BUILD_DEP%
+    - py -%PYTHON% -m pip install %BUILD_DEP%
     # Build wheel
-    - python -m pip wheel -v --no-cache-dir --wheel-dir=wheelhouse --no-binary=%PACKAGE_NAME% %PROJECT_SPEC% %EXTRA_BUILD_OPTIONS%
-    - dir wheelhouse
+    - py -%PYTHON% -m pip wheel -v --no-cache-dir
+        --wheel-dir=wheelhouse --no-binary=%PACKAGE_NAME%
+        %PROJECT_SPEC% %EXTRA_BUILD_OPTIONS%
+    - dir /s /b wheelhouse
 
 test_script:
     # create test env
-    - virtualenv --python %PYTHON%\Python.exe test_env
-    - test_env\Scripts\activate.bat
-    - where python
-    - python -m pip install %TEST_DEP%
+    - py -%PYTHON% -m virtualenv test_env
+    - test_env\Scripts\python -m pip install %TEST_DEP%
 
     # install from wheel
-    - python -m pip install --pre --no-index --find-links=wheelhouse %PACKAGE_NAME%
+    - test_env\Scripts\python -m pip install --pre --no-index
+        --find-links=wheelhouse %PACKAGE_NAME%
 
     # Change into an innocuous directory and find tests from installation
     - mkdir for_testing
     - cd for_testing
-    - python --version
-    - python -c "import %PACKAGE_NAME%;"
+    - test_env\Scripts\python --version
+    - test_env\Scripts\python -c "import %PACKAGE_NAME%;"
     - cd ..
 
 artifacts:
     - path: wheelhouse
 
 on_success:
-  # Upload the generated wheel package to Rackspace
-  # On Windows, Apache Libcloud cannot find a standard CA cert bundle so we
-  # disable the ssl checks.
-  - pip install requests[security] twine
-  - twine upload --skip-existing wheelhouse\%PACKAGE_NAME%*.whl
+  # Upload the generated wheel package to PyPI.
+  - py -%PYTHON% -m pip install requests[security] twine
+  - py -%PYTHON% -m twine upload --skip-existing wheelhouse\%PACKAGE_NAME%*.whl
 
 cache:
   # Use the appveyor cache to avoid re-downloading large archives.
