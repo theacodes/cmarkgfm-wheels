@@ -21,8 +21,8 @@ environment:
     # TWINE_REPOSITORY_URL: "https://test.pypi.org/legacy/"
 
   matrix:
-    - PYTHON: '2.7-32'
-    - PYTHON: '2.7'
+    # - PYTHON: '2.7-32'
+    # - PYTHON: '2.7'
     - PYTHON: '3.4-32'
     - PYTHON: '3.4'
     - PYTHON: '3.5-32'
