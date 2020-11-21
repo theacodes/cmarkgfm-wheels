@@ -20,18 +20,13 @@ env:
     # # TWINE_USERNAME and TWINE_PASSWORD for TestPyPI
     # - secure: XGg8SBBlg0xxqvTfRxSqy6qYe6QnGhNfb7DQ6PNeoZrp+IvqMN4FmctlYX677c5lk4s3gTVvxFNJvk9Rn2pdtQ97AzgLs/oQ63IofUkwLUc14wiaRTyjFBMnd0/31f7uCaziIFpD5BKcpdCteQhllxl8FFohZRQB+QI4tClFjgQ9p/wYj3vuHWkEcO4MaYDRa2r0XovWx6GJ+v+Kf0R0EUw4ufXm5Ygv9xT8UfOwqH1nYPXm0g/T4uxJqkg49nX4arUAW6HrcVXZQh76cSPhUwDC07qbjSX9LMhtLf8ZWGHLw1R/LwK4BMKXKSwW2hf6Ledr8KioaWzX+aCK/L8dQGCq4ReQtRhK8q4tSu2r5DSMtFDTh+ZGDc2v9JyEzAYIIbg6zeOjwJltqPC37LK6xostbyt75rUVGnklCecHBvdpvgdT0/4B0RneE2r9d2MQPA1wR5cp3dw+c2VYHvw3rs4UVGBWwwg708P8633dzgPQlN3glMPS4VdlCGh9uKu0iBkOX85T6+MHWxFtJkWiwMvrr3gLeI3HztCqh4u4XsjVWDVwwMm8aHkgI6rkzPMLLJHNfKZjDU/wALrhJT9SQ3YPXfFD3b66INSwBsh3IiOAV9d5gkVfufnY2o54Toq81VQ01KLKMGTdAmONWdwPZdLMmwzaaBEwnY/HQ66Yc2U=
 
-language: python
-# The travis Python version is unrelated to the version we build and test
-# with.  This is set with the MB_PYTHON_VERSION variable.
-python: 3.5
+language: generic
 sudo: required
-dist: trusty
+dist: xenial
+python: 3.8
 services: docker
 
 matrix:
-  exclude:
-    # Exclude the default Python 3.5 build
-    - python: 3.5
   include:
     - os: linux
       env: MB_PYTHON_VERSION=2.7
