@@ -79,8 +79,8 @@ test_script:
     # Change into an innocuous directory and find tests from installation
     - mkdir for_testing
     - cd for_testing
-    - test_env\Scripts\python --version
-    - test_env\Scripts\python -c "import %PACKAGE_NAME%;"
+    - ..\test_env\Scripts\python --version
+    - ..\test_env\Scripts\python -c "import %PACKAGE_NAME%;"
     - cd ..
 
 artifacts:
